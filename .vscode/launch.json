@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [],
+            "args": ["text1.txt:text2.txt", "text3.txt:text4.txt"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/lab1",
             "environment": [],

@@ -2,32 +2,32 @@
 #include "lib.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 
 
+
+
+
 main_table* create_table(int size) {
     main_table* result = (main_table*)calloc(1,sizeof(main_table));
-    result->table = (table*)calloc(size, sizeof(table));
+    result->block_table = (block**)calloc(size, sizeof(block*));
     result->size = size;
     return result;
 }
 
 int count_lines(char* file1) {
     FILE *fptr1 = fopen(file1, "r");
-
     if(fptr1 == NULL){
         return 0;;
     }
-    
     char buf[200];
     int lines_count = 0;
     while(fgets(buf, sizeof(buf), fptr1) != NULL && buf[0] != '\0'){
         lines_count += 1;
     }
-
     fclose(fptr1);
-
     return lines_count;
 }
 
@@ -60,21 +60,66 @@ void merge_files(pair* files) {
     fclose(fptr2);
 }
 
-int add_rowblock(table* tab, int idx, pair* files) {
-    tab->size = files->size;
-    tab->files = files;
-    tab->row = (char**)calloc(tab->size, sizeof(char*));
+
+block* add_rowblock(int idx, pair* files) {
+    block* result = (block*)calloc(1, sizeof(block));
+    result->size = files->size;
+    result->files = files;
+    result->row = (char**)calloc(result->size, sizeof(char*));
     size_t size_buf = 0;
-    for(int i = 0;i < tab->size;i++) {
-        getline(&(tab->row[i]), &size_buf, files->tmp_merged);
+    for(int i = 0;i < result->size;i++) {
+        getline(&(result->row[i]), &size_buf, files->tmp_merged);
+        size_buf = 0;
     }
-    return idx;
+    return result;
+}
+
+
+pair* merge_sequence(main_table* main_tab, char** argv){
+    int size = main_tab->size;
+    pair* result = (pair*)calloc(size, sizeof(pair));
+    printf("%s", (result+1)->file1);
+    for(int i = 0; i < size; i++){
+        result[i].file1 = strtok(argv[i], ":");
+        result[i].file2 = strtok(NULL, "");
+        merge_files(result + i);
+    }
+    return result;
+}
+
+void delete_block(main_table* main_tab, int block_index) {
+    free(main_tab->block_table[block_index]->row);
+    main_tab->block_table[block_index]->row = NULL;
+    free(main_tab->block_table[block_index]);
+    main_tab->block_table[block_index] = NULL;
+}
+
+void delete_row(main_table* main_tab, int block_index, int row_index) {
+    block* block = main_tab->block_table[block_index];
+    if(block == NULL) return;
+    if(block == NULL) return;
+    free(block->row[row_index]);
+    block->row[row_index] = NULL;
 }
 
 void display(main_table* tab) {
+
     for(int i = 0;i < tab->size;i++){
-        for(int j = 0;j < tab->table[i].size;j++) {
-            printf("%s", (tab->table[i]).row[j]);
+        block* block = tab->block_table[i];
+        if(block == NULL) continue;
+        for(int j = 0;j < block->size;j++) {
+            if(block->row[j] == NULL) continue;
+            printf("%s", block->row[j]);
         }
     }
+}
+
+void clean(main_table* tab) {
+    for(int i = 0;i < tab->size;i++){
+        if(tab->block_table[i] == NULL) continue;
+        free(tab->block_table[i]->row);
+        free(tab->block_table[i]);
+    }
+    free(tab->block_table);
+    free(tab);
 }

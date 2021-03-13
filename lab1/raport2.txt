@@ -1,0 +1,173 @@
+-----TEST 1-----
+----20 row----
+
+----5 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.000206s    0.000000s   0.000000s
+
+SAVING
+REAL         USER        SYSTEM
+0.000016s    0.000000s   0.000000s
+
+DELETING
+REAL         USER        SYSTEM
+0.000001s    0.000000s   0.000000s
+
+SAVE AND DELATE
+REAL         USER        SYSTEM
+0.000017s    0.000000s   0.000000s
+
+----200 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.007250s    0.000000s   0.000000s
+
+SAVING
+REAL         USER        SYSTEM
+0.000887s    0.000000s   0.000000s
+
+DELETING
+REAL         USER        SYSTEM
+0.000017s    0.000000s   0.000000s
+
+SAVE AND DELATE
+REAL         USER        SYSTEM
+0.000696s    0.000000s   0.000000s
+
+----1000 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.035308s    0.000000s   0.030000s
+
+SAVING
+REAL         USER        SYSTEM
+0.004261s    0.000000s   0.010000s
+
+DELETING
+REAL         USER        SYSTEM
+0.000087s    0.000000s   0.000000s
+
+SAVE AND DELATE
+REAL         USER        SYSTEM
+0.003369s    0.000000s   0.000000s
+
+
+-----TEST 2-----
+----400 rows----
+
+----5 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.000411s    0.000000s   0.000000s
+
+SAVING
+REAL         USER        SYSTEM
+0.000273s    0.000000s   0.000000s
+
+DELETING
+REAL         USER        SYSTEM
+0.000001s    0.000000s   0.000000s
+
+SAVE AND DELATE
+REAL         USER        SYSTEM
+0.000240s    0.000000s   0.000000s
+
+----200 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.015211s    0.010000s   0.010000s
+
+SAVING
+REAL         USER        SYSTEM
+0.010929s    0.000000s   0.000000s
+
+DELETING
+REAL         USER        SYSTEM
+0.000034s    0.000000s   0.000000s
+
+SAVE AND DELATE
+REAL         USER        SYSTEM
+0.009832s    0.010000s   0.010000s
+
+----1000 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.075584s    0.060000s   0.020000s
+
+SAVING
+REAL         USER        SYSTEM
+0.053566s    0.020000s   0.030000s
+
+DELETING
+REAL         USER        SYSTEM
+0.000201s    0.000000s   0.000000s
+
+SAVE AND DELATE
+REAL         USER        SYSTEM
+0.047039s    0.030000s   0.010000s
+
+
+-----TEST 3-----
+----1000 rows----
+
+----5 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.000759s    0.000000s   0.000000s
+
+SAVING
+REAL         USER        SYSTEM
+0.000645s    0.000000s   0.000000s
+
+DELETING
+REAL         USER        SYSTEM
+0.000001s    0.000000s   0.000000s
+
+SAVE AND DELATE
+REAL         USER        SYSTEM
+0.000567s    0.000000s   0.000000s
+
+----200 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.028129s    0.020000s   0.010000s
+
+SAVING
+REAL         USER        SYSTEM
+0.026312s    0.020000s   0.020000s
+
+DELETING
+REAL         USER        SYSTEM
+0.000051s    0.000000s   0.000000s
+
+SAVE AND DELATE
+REAL         USER        SYSTEM
+0.022890s    0.010000s   0.000000s
+
+----1000 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.139531s    0.120000s   0.030000s
+
+SAVING
+REAL         USER        SYSTEM
+0.132791s    0.070000s   0.060000s
+
+DELETING
+REAL         USER        SYSTEM
+0.000225s    0.000000s   0.000000s
+
+SAVE AND DELATE
+REAL         USER        SYSTEM
+0.115640s    0.070000s   0.050000s
+(null)

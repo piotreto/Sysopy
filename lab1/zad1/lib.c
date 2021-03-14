@@ -78,7 +78,6 @@ block* add_rowblock(int idx, pair* files) {
 pair* merge_sequence(main_table* main_tab, char** argv){
     int size = main_tab->size;
     pair* result = (pair*)calloc(size, sizeof(pair));
-    printf("%s", (result+1)->file1);
     for(int i = 0; i < size; i++){
         result[i].file1 = strtok(argv[i], ":");
         result[i].file2 = strtok(NULL, "");
@@ -102,15 +101,27 @@ void delete_row(main_table* main_tab, int block_index, int row_index) {
     block->row[row_index] = NULL;
 }
 
+int count_rows(main_table* main_tab, int index) {
+    block* block = main_tab->block_table[index];
+    if(block == NULL) return 0;
+    int result = 0;
+    for(int i = 0;i < block->size;i++) {
+        if(block->row[i] != NULL) result += 1;
+    }
+    return result;
+}
+
 void display(main_table* tab) {
 
     for(int i = 0;i < tab->size;i++){
         block* block = tab->block_table[i];
         if(block == NULL) continue;
+        printf("\nNumber of rows: %d\n", count_rows(tab, i));
         for(int j = 0;j < block->size;j++) {
             if(block->row[j] == NULL) continue;
             printf("%s", block->row[j]);
         }
+        puts("");
     }
 }
 

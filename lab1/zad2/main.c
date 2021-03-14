@@ -149,20 +149,47 @@ int main(int argc, char **argv) {
         puts("----1000 pairs----");
         time_test("test3.txt", 1000);
 
+        return 0;
+
     }
     if(strcmp(argv[1], "create_table") != 0){
         puts("Firstly you have to create table");
-        
+        return 0;
+    }
+    int size = atoi(argv[2]);
+    main_table* tab = create_table(size);
+    if(strcmp(argv[3], "merge_files") != 0) {
+        puts("Nothing happend");
+        free(tab);
+    }
+    pair* seq = merge_sequence(tab, argv + 4);
+
+    for(int i = 0;i < size;i++){
+        tab->block_table[i] = add_rowblock(i, &seq[i]);
     }
 
-    main_table* tab = create_table(2);
-    pair* seq = merge_sequence(tab, argv+1);
-    tab->block_table[0] = add_rowblock(0, &seq[0]);
-    tab->block_table[1] = add_rowblock(1, &seq[1]);
+    puts("");
+    puts("Your merged files, wooho!");
+    puts("");
     display(tab);
-    delete_row(tab, 0,2);
-    display(tab);
-    delete_block(tab, 0);
+
+    for(int i = size + 4; i < argc;i++) {
+        if(strcmp(argv[i], "remove_block") == 0){
+            i += 1;
+            int idx = atoi(argv[i]);
+            delete_block(tab, idx);
+        } else if(strcmp(argv[i], "remove_row") == 0) {
+            i += 1;
+            int block_index = atoi(argv[i]);
+            i += 1;
+            int row_index = atoi(argv[i]);
+            delete_row(tab, block_index, row_index);
+        } else {
+            break;
+        }
+    }
+
+    puts("Your final result");
     display(tab);
     clean(tab);
     free(seq);

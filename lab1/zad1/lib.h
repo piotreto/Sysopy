@@ -31,7 +31,7 @@ block* add_rowblock(int idx, pair* files);
 void delete_block(main_table* tab, int block_index);
 void delete_row(main_table* tab, int block_index, int row_index);
 
-
+int count_rows(main_table* tab, int index);
 
 
 int count_lines(char* file1);

@@ -12,16 +12,22 @@ clean:
 	rm -f *.o
 	rm -f *.out
 	rm -f *test*
+	rm -f main
 
-all: clean libstatic
+run: clean libstatic
 	$(CC) -c main.c -o main.o
 	$(CC) -static main.o -L. lib.a -o main
+	./main create_table 2 merge_files text1.txt:text2.txt text3.txt:text4.txt remove_block 0 remove_row 1 1
+	make clean
 
-time_test: all
+test: clean libstatic
 	seq 1 20 > test1.txt
 	seq 1 400 > test2.txt
 	seq 1 1000 > test3.txt
+	$(CC) -c main.c -o main.o
+	$(CC) -static main.o -L. lib.a -o main
 	./main test test1.txt test2.txt test3.txt > raport2.txt
+	make clean
 
 
 

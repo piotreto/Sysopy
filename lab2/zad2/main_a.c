@@ -29,6 +29,16 @@ char *getline_f(FILE *fptr)
     size_t readed = fread(tmp_string, sizeof(char), tmp_size, fptr);
     int count = is_line(tmp_string, readed);
     
+    while(count == -1 && readed == tmp_size) { // if readed < tmp_size it means we got end of file, MonkaS
+        free(tmp_string);
+        fseek(fptr, -readed ,SEEK_CUR);
+        tmp_size *= 2;
+ 
+        tmp_string = (char*)calloc(tmp_size, sizeof(char));
+        readed = fread(tmp_string, sizeof(char), tmp_size, fptr);
+        count = is_line(tmp_string, readed);
+    }
+    
     char *result;
     if (count == -1) // we are on last line, that doesnt contain \n
     {

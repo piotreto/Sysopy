@@ -22,6 +22,16 @@ char *getline_s(int in)
     char *tmp_string = (char *)calloc(tmp_size, sizeof(char));
     size_t readed = read(in, tmp_string, tmp_size);
     int count = is_line(tmp_string, readed);
+    while(count == -1 && readed == tmp_size) { // if readed < tmp_size it means we got end of file, MonkaS
+        free(tmp_string);
+        lseek(in, -readed ,SEEK_CUR);
+        tmp_size *= 2;
+ 
+        tmp_string = (char*)calloc(tmp_size, sizeof(char));
+        readed = read(in, tmp_string, tmp_size);
+        count = is_line(tmp_string, readed);
+    }
+    
     char *result;
     if (readed == 0)
     {

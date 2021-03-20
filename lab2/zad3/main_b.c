@@ -43,6 +43,16 @@ char *getline_s(int in)
     char *tmp_string = (char *)calloc(tmp_size, sizeof(char));
     size_t readed = read(in, tmp_string, tmp_size);
     int count = is_line(tmp_string, readed);
+    while(count == -1 && readed == tmp_size) { // if readed < tmp_size it means we got end of file, MonkaS
+        free(tmp_string);
+        lseek(in, -readed ,SEEK_CUR);
+        tmp_size *= 2;
+ 
+        tmp_string = (char*)calloc(tmp_size, sizeof(char));
+        readed = read(in, tmp_string, tmp_size);
+        count = is_line(tmp_string, readed);
+    }
+    
     char *result;
     if (readed == 0)
     {
@@ -73,8 +83,7 @@ int main(int argc, char **argv) {
     int out1 = open("a.txt", O_WRONLY|O_CREAT,S_IRUSR|S_IWUSR);
     int out2 = open("b.txt", O_WRONLY|O_CREAT,S_IRUSR|S_IWUSR);
     int out3 = open("c.txt", O_WRONLY|O_CREAT,S_IRUSR|S_IWUSR);
-    printf("dupa");
-
+    
     int counter = 0;
 
     char* line = NULL;

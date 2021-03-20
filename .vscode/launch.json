@@ -5,13 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "gcc - Build and debug active file",
+            "name": "gcc-9 - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": ["create_table", "2", "merge_files", "text1.txt:text2.txt", "text3.txt:text4.txt", "remove_block", "0", "remove_row", "1", "1"],
+            "args": ["test_in.txt", "test_out.txt", "ala", "ewa"],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/lab1",
+            "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -22,7 +22,7 @@
                     "ignoreFailures": true
                 }
             ],
-            // "preLaunchTask": "C/C++: gcc build active file",
+            "preLaunchTask": "C/C++: gcc-9 build active file",
             "miDebuggerPath": "/usr/bin/gdb"
         }
     ]

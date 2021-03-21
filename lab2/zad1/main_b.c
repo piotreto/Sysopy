@@ -4,6 +4,14 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#include <sys/times.h>
+#include <time.h>
+
+typedef struct time_struct {
+    double real;
+    double user;
+    double sys;
+} time_struct;
 
 int is_line(char *string, int size)
 {
@@ -53,8 +61,56 @@ char *getline_s(int in)
     free(tmp_string);
     return result;
 }
+
+void measure_time() {
+    struct tms test_times[2]; //usr and sys
+    clock_t test_times_real[2];
+
+    times(&test_times[0]);
+    test_times_real[0] = clock();
+    
+    int  fptr1 = open("5000rows.txt", O_RDONLY);
+    int  fptr2 = open("5000rows.txt", O_RDONLY);
+    if(fptr1 != -1 && fptr2 != -1) {
+        char* line1;
+        char* line2;
+        line1 = getline_s(fptr1);
+        line2 = getline_s(fptr2);
+        while (line1  != NULL || line2 != NULL)
+        {
+            if (line1 != NULL)
+            {
+                free(line1);
+                line1 = getline_s(fptr1);
+            }
+            if (line2 != NULL)
+            {
+                free(line2);
+                line2 = getline_s(fptr2);
+            }
+        }
+        close(fptr1);
+        close(fptr2);
+        times(&test_times[1]);
+        test_times_real[1] = clock();
+        time_struct time_tab;
+        time_tab.real = (double) (test_times_real[1] - test_times_real[0]) / CLOCKS_PER_SEC;
+        time_tab.sys = (double) (test_times[1].tms_stime - test_times[0].tms_stime) / sysconf(_SC_CLK_TCK);
+        time_tab.user = (double) (test_times[1].tms_utime - test_times[0].tms_utime) / sysconf(_SC_CLK_TCK);
+        printf("REAL         USER        SYSTEM\n");
+        printf("%lfs    %lfs   %lfs\n", time_tab.real, time_tab.user, time_tab.sys);
+
+    } else {
+        printf("Problem with opening test file. Try again\n");
+        return;
+    }
+}
 int main(int argc, char **argv)
 {
+    if(argc == 2 && strcmp(argv[1], "test") == 0) {
+        measure_time();
+        return 0;
+    }
     int fptr1;
     int fptr2;
     if (argc == 3)
@@ -96,6 +152,8 @@ int main(int argc, char **argv)
                 line2 = getline_s(fptr2);
             }
         }
+        close(fptr1);
+        close(fptr2);
     }
     else
     {

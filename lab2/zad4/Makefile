@@ -20,3 +20,12 @@ test2: clean
 	make zad4_b
 	./main_b test_in.txt test_out.txt ala ewa
 	make clean
+test_time:
+	make clean
+	make zad4_a
+	make zad4_b
+	echo "LIBRARY TEST\n" > pomiar_zad_4.txt
+	./main_a test >> pomiar_zad_4.txt
+	echo "\nSYSTEM TEST\n" >> pomiar_zad_4.txt
+	./main_b test >> pomiar_zad_4.txt
+	make clean

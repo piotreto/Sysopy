@@ -1,6 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/times.h>
+#include <time.h>
+#include <unistd.h>
+
+
+typedef struct time_struct {
+    double real;
+    double user;
+    double sys;
+} time_struct;
+
 
 int is_line(char *string, int size)
 {
@@ -48,8 +59,52 @@ char *getline_f(FILE *fptr)
     return result;
 }
 
+void measure_time() {
+    struct tms test_times[2]; //usr and sys
+    clock_t test_times_real[2];
+
+    times(&test_times[0]);
+    test_times_real[0] = clock();
+    
+    FILE* fptr1 = fopen("5000rows.txt", "r");
+    FILE* fptr2 = fopen("5000rows.txt", "r");
+    if(fptr1 && fptr2) {
+        while (feof(fptr1) == 0 || feof(fptr2) == 0)
+        {
+            if (feof(fptr1) == 0)
+            {
+                char *line = getline_f(fptr1);
+                free(line);
+            }
+            if (feof(fptr2) == 0)
+            {
+                char *line = getline_f(fptr2);
+                free(line);
+            }
+        }
+        fclose(fptr1);
+        fclose(fptr2);
+        times(&test_times[1]);
+        test_times_real[1] = clock();
+        time_struct time_tab;
+        time_tab.real = (double) (test_times_real[1] - test_times_real[0]) / CLOCKS_PER_SEC;
+        time_tab.sys = (double) (test_times[1].tms_stime - test_times[0].tms_stime) / sysconf(_SC_CLK_TCK);
+        time_tab.user = (double) (test_times[1].tms_utime - test_times[0].tms_utime) / sysconf(_SC_CLK_TCK);
+        printf("REAL         USER        SYSTEM\n");
+        printf("%lfs    %lfs   %lfs\n", time_tab.real, time_tab.user, time_tab.sys);
+
+    } else {
+        printf("Problem with opening test file. Try again\n");
+        return;
+    }
+}
+
 int main(int argc, char **argv)
 {
+    if(argc == 2 && strcmp(argv[1],"test") == 0) {
+        measure_time();
+        return 0;
+    }
     FILE *fptr1;
     FILE *fptr2;
     if (argc == 3)

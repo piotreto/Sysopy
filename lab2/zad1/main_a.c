@@ -66,8 +66,8 @@ void measure_time() {
     times(&test_times[0]);
     test_times_real[0] = clock();
     
-    FILE* fptr1 = fopen("5000rows.txt", "r");
-    FILE* fptr2 = fopen("5000rows.txt", "r");
+    FILE* fptr1 = fopen("../duze_pliki/5000rows.txt", "r");
+    FILE* fptr2 = fopen("../duze_pliki/5000rows.txt", "r");
     if(fptr1 && fptr2) {
         while (feof(fptr1) == 0 || feof(fptr2) == 0)
         {

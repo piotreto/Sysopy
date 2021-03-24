@@ -72,7 +72,7 @@ void measure_time() {
     times(&test_times[0]);
     test_times_real[0] = clock();
     
-    FILE* fptr1 = fopen("5000rows.txt", "r");
+    FILE* fptr1 = fopen("../duze_pliki/5000rows.txt", "r");
     char ch = 'c';
     if(fptr1) {
         while (feof(fptr1) == 0)

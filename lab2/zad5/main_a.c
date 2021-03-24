@@ -113,7 +113,7 @@ int main(int argc, char** argv){
 
         times(&test_times[0]);
         test_times_real[0] = clock();
-        char* file1 = "5000rows_in.txt";
+        char* file1 = "../duze_pliki/5000rows.txt";
         char* file2 = "5000rows_out.txt";
         break_lines(file1,file2);
         times(&test_times[1]);

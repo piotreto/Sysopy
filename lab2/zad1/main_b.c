@@ -69,8 +69,8 @@ void measure_time() {
     times(&test_times[0]);
     test_times_real[0] = clock();
     
-    int  fptr1 = open("5000rows.txt", O_RDONLY);
-    int  fptr2 = open("5000rows.txt", O_RDONLY);
+    int  fptr1 = open("../duze_pliki/5000rows.txt", O_RDONLY);
+    int  fptr2 = open("../duze_pliki/5000rows.txt", O_RDONLY);
     if(fptr1 != -1 && fptr2 != -1) {
         char* line1;
         char* line2;

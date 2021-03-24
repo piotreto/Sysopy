@@ -1,9 +1,10 @@
 LIBRARY TEST
 
 REAL         USER        SYSTEM
-0.158844s    0.130000s   0.010000s
+0.164932s    0.160000s   0.000000s
 
 SYSTEM TEST
 
+I couldnt open your files, something went wrong.
 REAL         USER        SYSTEM
-7.977418s    1.740000s   6.230000s
+0.000041s    0.000000s   0.000000s

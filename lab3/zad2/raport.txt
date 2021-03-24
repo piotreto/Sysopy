@@ -1,0 +1,64 @@
+-----TEST 1-----
+----20 row----
+
+----5 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.000206s    0.000000s   0.000000s
+
+----200 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.005679s    0.000000s   0.000000s
+
+----1000 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.028823s    0.000000s   0.030000s
+
+
+-----TEST 2-----
+----400 rows----
+
+----5 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.000157s    0.000000s   0.000000s
+
+----200 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.005977s    0.000000s   0.010000s
+
+----1000 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.029314s    0.000000s   0.020000s
+
+
+-----TEST 3-----
+----1000 rows----
+
+----5 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.000147s    0.000000s   0.010000s
+
+----200 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.006085s    0.000000s   0.000000s
+
+----1000 pairs----
+
+MERGE
+REAL         USER        SYSTEM
+0.029375s    0.000000s   0.030000s

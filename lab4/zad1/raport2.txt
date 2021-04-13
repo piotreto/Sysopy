@@ -1,0 +1,8 @@
+Testy wykonałem dla proponowanego w treści zadania SIGUSR1.
+
+
+Po wykonaniu funkcji fork, proces potomny dziedziczy wartości maski sygnałów oraz ustalenia dotyczące obsługi sygnałów,
+jednak nieobslużone sygnały, w przypadku testowania PENDING, są czyszczone i potomek nie ma do nich dostępu.
+
+Po wykonaniu exec maska obsługi sygnałów oraz nieobsłużone sygnały są takie same, jak w procesie w którym wywołano
+funkcję exec.

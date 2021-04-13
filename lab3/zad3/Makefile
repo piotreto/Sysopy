@@ -8,5 +8,5 @@ zad3:
 run:
 	make clean
 	make zad3
-	./main ../../.. hakunamatata 10
+	./main ../.. hakunamatata 10
 	make clean

@@ -1,0 +1,13 @@
+Udało mi się zaimplementować wszystkie zadania.
+Każdy plik ma swojego Makefile`a.
+
+
+W zad1 aby uruchomić na przykładowych danych zadanie należy wpisać make run.
+Aby zmienić dane wejściowe można zmienić argument w makefilu lub skompilowac program
+komendą make mad1 i odpalić przez konsole ./main (argumenty).
+
+W zad2 podobnie. Make run żeby odpalić na przykładowych danych. Make test_time wykonuje testy czasowe
+na dużych plikach załączonych w folderze duze_pliki. Raport jest wynikiem dzialania tej komendy.
+
+W zad3 makefile wyglada podobnie jak przy zad1 więc odpala się i kompiluje się tak samo.
+

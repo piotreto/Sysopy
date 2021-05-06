@@ -32,11 +32,6 @@ zad1b:
 	$(CC) -o exec exec.c
 	$(CC) -o main1b main1b.c
 
-test1b_handler:
-	make clean
-	make zad1b
-	./main1b handler
-	make clean
 test1b_mask:
 	make clean
 	make zad1b

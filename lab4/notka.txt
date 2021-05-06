@@ -1,0 +1,9 @@
+Udało mi się zaimplementować całą potrzebną funkcjonalność.
+1.Jeśli chodzi o zadanie 1, podzieliłem to na dwa programy, jeden, main1a testuje zachowanie dla fork(), main2b 
+dla exec(). Testowa uruchomienia można wykonać przez make'a, np make test1a_handler, make test1b_mask
+2. Testowe uruchomienie: make test
+3. Zadanie 3 tez podzielone jest na dwie części, tak jak było napisane w treści zadania. W obydwu przypadkach
+kompilacje catchera i sendera wykonujemy przez: make main. Catcher odpalamy np ./catcher KILL, jako argument podajemy
+jedna z opcji, duzymi literami!!!(KILL, SIGRT, SIGQUEUE). Catcher wypisuje PID procesu, ktory potrzebujemy do uruchomienia
+sendera w osobnym terminale. Musimy go wywołać z taką sama opcją działania: ./sender PID ILE_SYGNALOW OPCJA,  np
+./sender PID 1000 KILL. Tak jak chcielismy, w podpunkcie b wszystkie sygnaly docieraja i wracaja do sendera.

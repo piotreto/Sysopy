@@ -21,7 +21,7 @@ void test_ignore() {
 
 void test_mask() {
     printf("I'm testing MASK option in exec\n");
-    printf("Raising in child\n");
+    printf("Raising in exec\n");
     raise(TEST);
     sigset_t pended_signals;
     sigpending(&pended_signals);

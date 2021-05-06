@@ -1,0 +1,4 @@
+Udało mi się zaimplementować dwie wersje chatu: SYSTEM V(zad1) oraz POSIX(zad2)
+aby skompilowac programy nalezy w folderach napisach komende make all. Serwer odpalamy ./server
+klienta - ./client. CLient moze wpisywac komendy LIST, CONNECT, STOP. ABy polaczyc sie z klientem na prywatny chat
+nalezy wpisac w klience komende np CONNECT 1.

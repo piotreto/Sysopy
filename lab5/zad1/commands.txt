@@ -1,0 +1,14 @@
+skladnik1 = cat /etc/passwd | wc -l
+skladnik2 = ls | grep txt
+skladnik3 = grep 11
+skladnik4 = echo aaa
+skladnik5 = ls
+skladnik6 = grep main
+skladnik7 = wc
+
+
+skladnik1
+skladnik4 | skladnik7
+skladnik2
+skladnik4
+skladnik5 | skladnik6

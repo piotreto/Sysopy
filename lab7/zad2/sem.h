@@ -14,22 +14,25 @@
 #include <sys/shm.h>
 #include <sys/types.h>
 #include <sys/sem.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <semaphore.h>
+
+#define BAKE_FILE "/bake"
+#define TABLE_FILE "/table"
 
 
-#define BAKE_FILE "bake"
-#define TABLE_FILE "table"
-#define PIZZERIA_FILE "pizzeria"
+#define BAKE_FILE_S "/bakes"
+#define TABLE_FILE_S "/tables"
 
-#define PIZZERIA_ID 0
-#define BAKE_ID 1
-#define TABLE_ID 2
+
 
 #define BAKE_SIZE 5
 #define TABLE_SIZE 5
 
+
 #define rand_number(_min, _max) (rand() %(_max - _min + 1)) + _min
-
-
 
 typedef struct table {
     int place[TABLE_SIZE];
@@ -44,19 +47,11 @@ typedef struct bake {
     int next_free;
 } bake;
 
-union semun {
-    int val;
-    struct semid_ds *buf;
-    short *array;
-};
+int get_shared_block(char *filename, int size);
+void *attach_memory_block(char* filename, int size);
 
-int get_shared_block(char *filename, int size, int project_id);
-void *attach_memory_block(char* filename, int size, int project_id);
-void block(int semaphore_id, struct sembuf* sb);
-void unlock(int semaphore_id, struct sembuf* sb);
 
 char* timestamp();
-
 
 
 

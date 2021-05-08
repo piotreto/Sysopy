@@ -7,6 +7,10 @@ pid_t *workers;
 bake* pizzeria_bake;
 table* pizzeria_table;
 
+sem_t* semaphore_bake;
+sem_t* semaphore_table;
+
+
 
 
 void handler_SIGINT(int signum)
@@ -17,59 +21,49 @@ void handler_SIGINT(int signum)
     free(workers);
 }
 
-void clean_memory(char *filename, int size, int project_id, void* block)
+void clean_memory(char *filename, int size, void* block)
 {
-
-    int shared_block_id = get_shared_block(filename, size, project_id);
-    if(shmdt(block) == -1) {
-        perror("Error while shmdt");
+    if(munmap(block, size) == -1) {
+        perror("Error while munmap");
         exit(1);
     }
-    if(shmctl(shared_block_id, IPC_RMID, NULL) == -1) {
-        perror("Error while shmctl in main");
+    if(shm_unlink(filename) == -1) {
+        perror("Error while shm_unlink in main");
         exit(1);
     }
 
 }
 
-void clean_semaphores(int semaphores_id, int n) {
-    if(semctl(semaphores_id, 0, IPC_RMID, NULL) == -1)
+void clean_semaphore(sem_t* semaphores_id, char* filename) {
+    if(sem_close(semaphores_id) == -1)
     {
-        perror("Error while removing semaphore");
+        perror("Error while closing sempahore");
+        exit(1);
+    }
+    if(sem_unlink(filename) == -1)
+    {
+        perror("Error while unlinking sempahore");
         exit(1);
     }
 }
 void start()
 {
-
-    // getting key for semaphore
-    key_t key;
-    key = ftok(PIZZERIA_FILE, PIZZERIA_ID);
-
     // creating sempaphore
-    int semaphore_id = semget(key, 2, 0666 | IPC_CREAT);
-
-    if(semaphore_id == -1) {
-        perror("Error while creating semaphore.\n");
+    semaphore_bake = sem_open(BAKE_FILE_S, O_CREAT, 0660, 1);
+    if (semaphore_bake == SEM_FAILED)
+    {
+        perror("Error while creating semaphore_bake");
+        exit(1);
+    }
+    semaphore_table = sem_open(TABLE_FILE_S, O_CREAT, 0660, 1);
+    if (semaphore_table == SEM_FAILED)
+    {
+        perror("Error while creating semaphore_table");
         exit(1);
     }
 
 
-    // initializating semaphore
-    union semun arg;
-    arg.val = 1;
-
-    if(semctl(semaphore_id, 0, SETVAL, arg) == -1) {
-        perror("Error while initializing semaphore.");
-        exit(1);
-    }
-
-    if(semctl(semaphore_id, 1, SETVAL, arg) == -1) {
-        perror("Error while initializing semaphore.");
-        exit(1);
-    }
-
-    pizzeria_bake = attach_memory_block(BAKE_FILE, sizeof(bake), BAKE_ID);
+    pizzeria_bake = attach_memory_block(BAKE_FILE, sizeof(bake));
     if (pizzeria_bake == (void*) -1) {
         perror("Error while getting memory for bake");
         exit(1);
@@ -77,7 +71,7 @@ void start()
     pizzeria_bake->n_pizzas = 0;
     pizzeria_bake->next_free = 0;
 
-    pizzeria_table = attach_memory_block(TABLE_FILE, sizeof(table), TABLE_ID);
+    pizzeria_table = attach_memory_block(TABLE_FILE, sizeof(table));
     if (pizzeria_table == (void*) -1) {
         perror("Error while getting memory for table");
         exit(1);
@@ -97,7 +91,7 @@ void start()
         if (pid == 0)
         {
             workers[i] = pid;
-            execlp("./chief", "./chief", NULL);
+            execlp("./chef", "./chef", NULL);
             exit(0);
         }
     }
@@ -116,9 +110,10 @@ void start()
         wait(NULL);
     }
 
-    clean_memory(BAKE_FILE, 0, BAKE_ID, pizzeria_bake);
-    clean_memory(TABLE_FILE, 0, TABLE_ID, pizzeria_table);
-    clean_semaphores(semaphore_id, 2);
+    clean_memory(BAKE_FILE, sizeof(bake),pizzeria_bake);
+    clean_memory(TABLE_FILE, sizeof(table),pizzeria_table);
+    clean_semaphore(semaphore_bake, BAKE_FILE_S);
+    clean_semaphore(semaphore_table, TABLE_FILE_S);
 
     
 }

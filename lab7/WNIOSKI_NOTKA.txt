@@ -1,0 +1,8 @@
+Udało mi się zaimplementować funkcjonalność zadania w dwóch wersjach, zad1 wersja SYSTEM V oraz zad2 wersja POSIX.
+Jeśli chodzi o wnioski, to dla N, M <= 5 piec i stol sie nie przepelniaja, procesy nie musza czekac na zwolnienie miejsca.
+Gdy N, M > 5 procesy muszą już czekać, np piekarz musi chwile trzymac pizze w ręku, gdyż piec jest pełny.
+
+
+URUCHOMIENIE
+Oba przypadki programu uruchamia sie po prostu komenda make run w odpowiednich folderach. Po przerwaniu (zakladam ze dzialanie pizzeri przerywamy
+poprzez CTRL + C) warto wykonac make clean ktory usunie zbedne pliki :)

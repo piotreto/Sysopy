@@ -12,7 +12,7 @@ build:
 
 run:
 	make build
-	./main 6 5
+	./main 5 5
 	make clean
 
 clean:

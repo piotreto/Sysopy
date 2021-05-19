@@ -1,0 +1,8 @@
+Udało mi się zaimplementować całą funkcjonalność działania, wraz z mierzeniem czasu.
+Przykładowy wynik działania to obraz image2.pgm - wynik działania programu dla obrazu image1.pgm.
+Aby uruchomić program na tym przykładowym obrazku wystarczy komenda make run.
+ABy uruchomić testy czasowe - komenda make test
+
+Wnioski:
+    Przy metodzie numbers, im wiecej watkow tym czas wykonania programu rosnie. Przy metodzie blocks, czas wykonanie programu
+    im wiecej watkow rosnie znikomo. Generalnie czas rosnie, poniewaz tworzenie watkow trwa dluzej niz sama operacja edycji obrazu.

@@ -1,0 +1,105 @@
+
+Times
+
+Test for numbers method with 1 threads
+Thread nr 1 execution time: 0.001016
+Program execution time: 0.001265
+
+
+Test for numbers method with 2 threads
+Thread nr 1 execution time: 0.002155
+Thread nr 2 execution time: 0.001491
+Program execution time: 0.002220
+
+
+Test for numbers method with 4 threads
+Thread nr 1 execution time: 0.001780
+Thread nr 2 execution time: 0.003722
+Thread nr 3 execution time: 0.002682
+Thread nr 4 execution time: 0.000595
+Program execution time: 0.004017
+
+
+Test for numbers method with 8 threads
+Thread nr 1 execution time: 0.001032
+Thread nr 2 execution time: 0.002668
+Thread nr 3 execution time: 0.004947
+Thread nr 4 execution time: 0.006098
+Thread nr 5 execution time: 0.008595
+Thread nr 6 execution time: 0.007210
+Thread nr 7 execution time: 0.003731
+Thread nr 8 execution time: 0.001602
+Program execution time: 0.008785
+
+
+Test for numbers method with 16 threads
+Thread nr 1 execution time: 0.002077
+Thread nr 2 execution time: 0.004445
+Thread nr 3 execution time: 0.007085
+Thread nr 4 execution time: 0.008502
+Thread nr 5 execution time: 0.011340
+Thread nr 6 execution time: 0.015737
+Thread nr 7 execution time: 0.013879
+Thread nr 8 execution time: 0.015346
+Thread nr 9 execution time: 0.012515
+Thread nr 10 execution time: 0.011066
+Thread nr 11 execution time: 0.016449
+Thread nr 12 execution time: 0.002010
+Thread nr 13 execution time: 0.008678
+Thread nr 14 execution time: 0.012556
+Thread nr 15 execution time: 0.012477
+Thread nr 16 execution time: 0.004879
+Program execution time: 0.019739
+
+
+
+
+Test for blocks method with 1 threads
+Thread nr 1 execution time: 0.000611
+Program execution time: 0.000836
+
+
+Test for blocks method with 2 threads
+Thread nr 1 execution time: 0.000926
+Thread nr 2 execution time: 0.000424
+Program execution time: 0.001169
+
+
+Test for blocks method with 4 threads
+Thread nr 1 execution time: 0.000933
+Thread nr 2 execution time: 0.000577
+Thread nr 3 execution time: 0.000268
+Thread nr 4 execution time: 0.001128
+Program execution time: 0.001537
+
+
+Test for blocks method with 8 threads
+Thread nr 1 execution time: 0.001022
+Thread nr 2 execution time: 0.001273
+Thread nr 3 execution time: 0.001486
+Thread nr 4 execution time: 0.000420
+Thread nr 5 execution time: 0.000468
+Thread nr 6 execution time: 0.000623
+Thread nr 7 execution time: 0.001001
+Thread nr 8 execution time: 0.001560
+Program execution time: 0.002412
+
+
+Test for blocks method with 16 threads
+Thread nr 1 execution time: 0.000609
+Thread nr 2 execution time: 0.000364
+Thread nr 3 execution time: 0.000331
+Thread nr 4 execution time: 0.000383
+Thread nr 5 execution time: 0.000641
+Thread nr 6 execution time: 0.000682
+Thread nr 7 execution time: 0.000676
+Thread nr 8 execution time: 0.000457
+Thread nr 9 execution time: 0.000229
+Thread nr 10 execution time: 0.000706
+Thread nr 11 execution time: 0.001294
+Thread nr 12 execution time: 0.000891
+Thread nr 13 execution time: 0.001017
+Thread nr 14 execution time: 0.000903
+Thread nr 15 execution time: 0.000502
+Thread nr 16 execution time: 0.000089
+Program execution time: 0.002692
